@@ -18,6 +18,7 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 
 export interface FilterOption {
   value: '' | RestaurantDTO['status'];
@@ -81,7 +82,7 @@ export class RestaurantsTableComponent implements AfterViewInit {
   filterOptions: FilterOption[] = FILTER_OPTIONS;
   tableHeight = 0;
 
-  constructor() {
+  constructor(private router: Router) {
     this.dataSource = new MatTableDataSource(this.restaurants);
   }
 
@@ -91,6 +92,10 @@ export class RestaurantsTableComponent implements AfterViewInit {
 
   private setHeight() {
     this.tableHeight = this.tableAndForm?.nativeElement?.offsetHeight || 0;
+  }
+
+  onClickManage(restaurantId: RestaurantDTO['id']) {
+    this.router.navigate([`/manage-restaurant/${restaurantId}`]);
   }
 
   onPaginationChange(params: PaginationChangeParams) {

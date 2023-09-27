@@ -1,23 +1,26 @@
-<div class="restaurants-table-container">
-  <div *ngIf="loading" class="overlay-loader-container">
-    <div class="overlay-loader" [style.height]="tableHeight + 'px'"></div>
+<div class="app-restaurants-table-container">
+  <div *ngIf="loading" class="app-overlay-loader-container">
+    <div class="app-overlay-loader" [style.height]="tableHeight + 'px'"></div>
   </div>
   <div class="mat-elevation-z8" #tableAndForm>
-    <div class="table-form-container">
-      <mat-select
-        class="filter-restaurants"
-        placeholder="Filter restaurants"
-        (selectionChange)="onSearchChange({ status: $event.value })">
-        <mat-option
-          *ngFor="let filterOption of filterOptions"
-          [value]="filterOption.value">
-          {{ filterOption.label }}
-        </mat-option>
-      </mat-select>
+    <div class="app-table-form-container">
+      <div>
+        <mat-select
+          class="app-filter-restaurants"
+          placeholder="Filter restaurants"
+          (selectionChange)="onSearchChange({ status: $event.value })">
+          <mat-option
+            *ngFor="let filterOption of filterOptions"
+            [value]="filterOption.value">
+            {{ filterOption.label }}
+          </mat-option>
+        </mat-select>
+      </div>
 
       <mat-paginator
         (page)="onPaginationChange($event)"
         [length]="paginationMeta?.itemCount"
+        [pageIndex]="(paginationMeta?.page || 1) - 1"
         [pageSize]="paginationMeta?.take"
         [pageSizeOptions]="[5, 10, 25, 50]"
         [showFirstLastButtons]="true"
@@ -25,42 +28,49 @@
       </mat-paginator>
     </div>
 
-    <table mat-table [dataSource]="dataSource" matSort>
-      <ng-container matColumnDef="name">
-        <th mat-header-cell mat-sort-header *matHeaderCellDef>Name</th>
-        <td mat-cell *matCellDef="let item">{{ item.name }}</td>
-      </ng-container>
+    <div class="app-table-responsive">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell mat-sort-header *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let item">{{ item.name }}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="status">
-        <th mat-header-cell mat-sort-header *matHeaderCellDef>Status</th>
-        <td mat-cell *matCellDef="let item">{{ item.status }}</td>
-      </ng-container>
+        <ng-container matColumnDef="status">
+          <th mat-header-cell mat-sort-header *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let item">{{ item.status }}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="address">
-        <th mat-header-cell mat-sort-header *matHeaderCellDef>Address</th>
-        <td mat-cell *matCellDef="let item">
-          {{ item.address.formattedAddress }}
-        </td>
-      </ng-container>
+        <ng-container matColumnDef="address">
+          <th mat-header-cell mat-sort-header *matHeaderCellDef>Address</th>
+          <td mat-cell *matCellDef="let item">
+            {{ item.address.formattedAddress }}
+          </td>
+        </ng-container>
 
-      <ng-container matColumnDef="website">
-        <th mat-header-cell mat-sort-header *matHeaderCellDef>Website</th>
-        <td mat-cell *matCellDef="let item">
-          <a target="_blank" rel="noreferrer" href="{{ item.website }}">{{
-            item.website
-          }}</a>
-        </td>
-      </ng-container>
+        <ng-container matColumnDef="website">
+          <th mat-header-cell mat-sort-header *matHeaderCellDef>Website</th>
+          <td mat-cell *matCellDef="let item">
+            <a target="_blank" rel="noreferrer" href="{{ item.website }}">{{
+              item.website
+            }}</a>
+          </td>
+        </ng-container>
 
-      <ng-container matColumnDef="action">
-        <th mat-header-cell mat-sort-header *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let item">
-          <button mat-raised-button color="primary">Manage</button>
-        </td>
-      </ng-container>
+        <ng-container matColumnDef="action">
+          <th mat-header-cell mat-sort-header *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let item">
+            <button
+              (click)="onClickManage(item.id)"
+              mat-raised-button
+              color="primary">
+              Manage
+            </button>
+          </td>
+        </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
   </div>
 </div>

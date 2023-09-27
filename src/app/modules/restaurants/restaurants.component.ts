@@ -11,7 +11,9 @@ import { LoaderService } from '../../services/loader.service';
 import { AppState } from '../../states/app.state';
 import {
   GetRequestParamsForRestaurants,
+  GetRestaurants,
   UpdateRequestParamsForRestaurants,
+  UpdateRestaurants,
 } from '../../actions/app.action';
 import { Observable } from 'rxjs';
 
@@ -21,8 +23,13 @@ import { Observable } from 'rxjs';
   styleUrls: ['./restaurants.component.scss'],
 })
 export class RestaurantsComponent implements AfterViewInit {
-  @Select(AppState.selectStateData)
+  @Select(AppState.getRequestParamsForRestaurantsSelector)
   searchParams$!: Observable<GetRestaurantsParams>;
+  @Select(AppState.getRestaurantsSelector)
+  restaurants$!: Observable<{
+    restaurants: RestaurantDTO[];
+    paginationMeta: PaginationMeta;
+  }>;
 
   restaurants: RestaurantDTO[] = [];
   paginationMeta!: PaginationMeta;
@@ -36,18 +43,26 @@ export class RestaurantsComponent implements AfterViewInit {
   ) {}
 
   ngOnInit() {
-    this.fetchRestaurants(this.searchParams);
     this.store.dispatch(new GetRequestParamsForRestaurants());
+    this.store.dispatch(new GetRestaurants());
 
     this.searchParams$.subscribe(returnData => {
       this.searchParams = returnData;
     });
+
+    this.restaurants$.subscribe(returnData => {
+      this.restaurants = returnData.restaurants;
+      this.paginationMeta = returnData.paginationMeta;
+    });
+
+    if (!this.restaurants.length) {
+      this.fetchRestaurants(this.searchParams);
+    }
   }
 
   fetchRestaurants(params: GetRestaurantsParams) {
     this.service.getRestaurants(params).subscribe(response => {
-      this.restaurants = response.data;
-      this.paginationMeta = response.meta;
+      this.store.dispatch(new UpdateRestaurants(response.data, response.meta));
     });
   }
 

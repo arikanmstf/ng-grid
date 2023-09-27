@@ -10,6 +10,13 @@ const routes: Routes = [
         m => m.RestaurantsModule
       ),
   },
+  {
+    path: 'manage-restaurant/:restaurantId',
+    loadChildren: () =>
+      import('./modules/manage-restaurant/manage-restaurant.module').then(
+        m => m.ManageRestaurantModule
+      ),
+  },
 ];
 
 @NgModule({

@@ -1,7 +1,7 @@
-.overlay-loader-container {
+.app-overlay-loader-container {
   position: relative;
 
-  .overlay-loader {
+  .app-overlay-loader {
     position: absolute;
     left: 0;
     top: 0;
@@ -12,13 +12,40 @@
   }
 }
 
-.table-form-container {
+.app-table-form-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 5px 20px;
+  padding: 8px 16px;
 
-  .filter-restaurants {
+  .app-filter-restaurants {
     max-width: 420px;
+  }
+}
+
+.app-table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+
+  table {
+    width: 100%;
+    max-width: 100%;
+    min-width: 768px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .app-table-form-container {
+    display: inline-block;
+
+    & > * {
+      width: 100%;
+    }
+
+    .app-filter-restaurants {
+      max-width: 767px;
+      min-height: 48px
+    }
   }
 }

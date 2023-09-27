@@ -1,0 +1,14 @@
+.app-manage-restaurant-container {
+  max-width: 768px;
+  margin: 0 auto;
+
+  .app-restaurant-card-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    h1, h2, h3, h4, h5 {
+      margin: 0 !important;
+    }
+  }
+}
