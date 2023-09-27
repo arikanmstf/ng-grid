@@ -6,4 +6,24 @@
     <h2>Manage restaurant</h2>
   </div>
   <app-restaurant-card [restaurant]="restaurant!!"></app-restaurant-card>
+  <div class="app-manage-restaurant-form-container">
+    <mat-card>
+      <mat-card-content>
+        <mat-card-header>
+          <mat-card-title> Add manager to this restaurant </mat-card-title>
+        </mat-card-header>
+        <div class="app-manage-restaurant-form">
+          <div class="app-manage-restaurant-form-inputs">
+            <mat-form-field>
+              <input matInput placeholder="Email address" />
+            </mat-form-field>
+            <mat-form-field>
+              <input type="password" matInput placeholder="Password" />
+            </mat-form-field>
+          </div>
+          <button mat-raised-button color="primary">Submit</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>
