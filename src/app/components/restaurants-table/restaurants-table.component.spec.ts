@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RestaurantsTableComponent } from './restaurants-table.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('RestaurantsTableComponent', () => {
   let component: RestaurantsTableComponent;
@@ -8,7 +9,7 @@ describe('RestaurantsTableComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [RestaurantsTableComponent],
+      imports: [RestaurantsTableComponent, BrowserAnimationsModule],
     });
     fixture = TestBed.createComponent(RestaurantsTableComponent);
     component = fixture.componentInstance;

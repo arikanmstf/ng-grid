@@ -2,6 +2,9 @@
 
 Grid list of restaurants powered by Angular
 
+### Demo
+* Application is live at: https://arikanmstf.github.io/ng-grid/
+
 ### Install
 * Clone the repo, install and run;
 * `$ git clone https://github.com/arikanmstf/ng-grid.git`
