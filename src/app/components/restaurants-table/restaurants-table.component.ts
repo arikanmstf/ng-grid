@@ -5,6 +5,7 @@ import {
   Input,
   SimpleChanges,
   ElementRef,
+  OnChanges,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
@@ -56,7 +57,7 @@ const FILTER_OPTIONS: FilterOption[] = [
   ],
   standalone: true,
 })
-export class RestaurantsTableComponent implements AfterViewInit {
+export class RestaurantsTableComponent implements AfterViewInit, OnChanges {
   @Input() restaurants!: RestaurantDTO[];
   @Input() paginationMeta: PaginationMeta = {
     page: 0,

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 
 import {
@@ -22,7 +22,7 @@ import { Observable } from 'rxjs';
   templateUrl: './restaurants.component.html',
   styleUrls: ['./restaurants.component.scss'],
 })
-export class RestaurantsComponent implements AfterViewInit {
+export class RestaurantsComponent implements OnInit, AfterViewInit {
   @Select(AppState.getRequestParamsForRestaurantsSelector)
   searchParams$!: Observable<GetRestaurantsParams>;
   @Select(AppState.getRestaurantsSelector)

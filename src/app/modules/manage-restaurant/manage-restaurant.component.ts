@@ -1,4 +1,9 @@
-import { AfterContentInit, AfterViewInit, Component } from '@angular/core';
+import {
+  AfterContentInit,
+  AfterViewInit,
+  Component,
+  OnInit,
+} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
 import { AppState } from '../../states/app.state';
@@ -18,7 +23,7 @@ import { LoaderService } from '../../services/loader.service';
   styleUrls: ['./manage-restaurant.component.scss'],
 })
 export class ManageRestaurantComponent
-  implements AfterViewInit, AfterContentInit
+  implements OnInit, AfterViewInit, AfterContentInit
 {
   @Select(AppState.getRestaurantsSelector)
   restaurants$!: Observable<{
