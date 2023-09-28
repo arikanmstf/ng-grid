@@ -37,7 +37,7 @@ export class RestaurantsComponent implements AfterViewInit {
   searchParams!: GetRestaurantsParams;
 
   constructor(
-    private service: RestaurantService,
+    private restaurantService: RestaurantService,
     private loaderService: LoaderService,
     private store: Store
   ) {}
@@ -61,7 +61,7 @@ export class RestaurantsComponent implements AfterViewInit {
   }
 
   fetchRestaurants(params: GetRestaurantsParams) {
-    this.service.getRestaurants(params).subscribe(response => {
+    this.restaurantService.getRestaurants(params).subscribe(response => {
       this.store.dispatch(new UpdateRestaurants(response.data, response.meta));
     });
   }

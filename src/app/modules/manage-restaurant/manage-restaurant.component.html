@@ -12,17 +12,48 @@
         <mat-card-header>
           <mat-card-title> Add manager to this restaurant </mat-card-title>
         </mat-card-header>
-        <div class="app-manage-restaurant-form">
+        <form
+          (ngSubmit)="onSubmit()"
+          class="app-manage-restaurant-form"
+          [formGroup]="form">
           <div class="app-manage-restaurant-form-inputs">
             <mat-form-field>
-              <input matInput placeholder="Email address" />
+              <input
+                matInput
+                placeholder="Email address"
+                formControlName="email" />
+              <mat-error
+                class="test-class"
+                *ngIf="
+                  form.controls.email.hasError('email') &&
+                  !form.controls.email.hasError('required')
+                ">
+                Please enter a valid email address
+              </mat-error>
+              <mat-error *ngIf="form.controls.email.hasError('required')">
+                Email is required
+              </mat-error>
             </mat-form-field>
             <mat-form-field>
-              <input type="password" matInput placeholder="Password" />
+              <input
+                type="password"
+                matInput
+                placeholder="Password"
+                formControlName="password" />
+              <mat-error *ngIf="form.controls.password.hasError('required')">
+                Password is required
+              </mat-error>
             </mat-form-field>
           </div>
-          <button mat-raised-button color="primary">Submit</button>
-        </div>
+          <button
+            type="submit"
+            [disabled]="shouldShowLoader"
+            mat-raised-button
+            color="primary">
+            <app-loader *ngIf="shouldShowLoader"></app-loader>
+            <span *ngIf="!shouldShowLoader">Submit</span>
+          </button>
+        </form>
       </mat-card-content>
     </mat-card>
   </div>

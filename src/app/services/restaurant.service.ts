@@ -32,6 +32,11 @@ export type GetRestaurantsParams = {
   status?: '' | RestaurantDTO['status'];
 };
 
+export type PostManagerParams = {
+  email: string;
+  password: string;
+};
+
 const DEFAULT_REQUEST_PARAMS = {
   page: 1,
   take: 10,
@@ -56,5 +61,15 @@ export class RestaurantService {
           : {}),
       },
     });
+  }
+
+  postManager(
+    restaurantId: RestaurantDTO['id'],
+    postManagerParams: PostManagerParams
+  ) {
+    return this.httpClient.post(
+      `${this.url}/restaurants/${restaurantId}/manager`,
+      postManagerParams
+    );
   }
 }

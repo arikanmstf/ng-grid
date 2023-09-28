@@ -9,12 +9,11 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { LoaderComponent } from './components/loader/loader.component';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { AppState } from './states/app.state';
 
 @NgModule({
-  declarations: [AppComponent, LoaderComponent],
+  declarations: [AppComponent],
   imports: [
     AppRoutingModule,
     BrowserAnimationsModule,
