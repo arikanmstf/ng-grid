@@ -95,6 +95,16 @@ export class RestaurantsTableComponent implements AfterViewInit, OnChanges {
     this.tableHeight = this.tableAndForm?.nativeElement?.offsetHeight || 0;
   }
 
+  // add prefix http:// if it's not set at BE.
+  formatUrl(website?: RestaurantDTO['website']) {
+    const prefix = 'http://';
+    if (!website) {
+      return website;
+    }
+
+    return !/^https?:\/\//i.test(website) ? prefix + website : website;
+  }
+
   onClickManage(restaurantId: RestaurantDTO['id']) {
     this.router.navigate([`/manage-restaurant/${restaurantId}`]);
   }
