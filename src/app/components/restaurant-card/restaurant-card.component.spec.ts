@@ -21,4 +21,14 @@ describe('RestaurantCardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should render restaurant name', () => {
+    expect(fixture.nativeElement.querySelector('h3').textContent).toContain(
+      component.restaurant.name
+    );
+  });
+  it('should render restaurant address', () => {
+    expect(
+      fixture.nativeElement.querySelector('address').textContent
+    ).toContain(component.restaurant.address.formattedAddress);
+  });
 });

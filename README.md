@@ -28,6 +28,11 @@ See `app.state.ts` and `restaurants.component.ts`.
 
 ### Testing
 * Linting with eslint and prettier; Run `npm run lint`
+* Covered by unit tests with Jasmine & Karma.
+  * See `manage-restaurant.component.spec.ts` for asserting form validation & submission
+  * See `restaurant.service.spec.ts` for api call
+  * See `restaurants.component.spec.ts` for rendering restaurants table
 
 ### Automation
-* This app builds when merged to master.
+* When pushed to master; runs tests with `ng lint` and `ng test`; and if tests passed, builds and deploys to GitHub pages
+* Using GitHub actions, see `build.yml`
